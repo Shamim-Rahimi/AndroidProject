@@ -126,19 +126,21 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      setState(() {
-                        _isLoginMode = false;
-                      });
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignUpCompletionPage(),
+                        ),
+                      );
                     },
-                    child: Text(
+                    child: const Text(
                       "ثبت نام",
                       style: TextStyle(
-                        color: !_isLoginMode
-                            ? Colors.white
-                            : const Color.fromARGB(255, 180, 180, 180),
+                        color: Colors.white,
                       ),
                     ),
                   ),
+
                   GestureDetector(
                     onTap: () {
                       setState(() {

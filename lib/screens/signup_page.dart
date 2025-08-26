@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../services/api_service.dart';
 import 'verification_page.dart';
@@ -33,19 +34,24 @@ class _SignUpCompletionPageState extends State<SignUpCompletionPage> {
           lastName: lastName,
           password: password,
         );
+
+        // بدنه‌ی جواب رو decode می‌کنیم
+        final data = jsonDecode(response.body);
+
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('ثبت‌نام با موفقیت انجام شد!')),
+          const SnackBar(content: Text('ثبت‌نام با موفقیت انجام شد')),
         );
+
+
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => VerificationPage(email: username),
           ),
         );
-
       } catch (error) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(error.toString())),
+          SnackBar(content: Text("خطا در ثبت‌نام: $error")),
         );
       }
     } else {
